@@ -45,11 +45,7 @@ function setupSidebar() {
 	}
 	
 	/* If user starts in the mobile display mode, we need to attach the
-	navbar classe for fixing layout. Only run if addClass is false.*/
-	/*if (switchWidth && viewportWidth <= switchWidth && addClass) {
-		sidebar.classList.add("navbar");
-		pageContent.classList.add("navbar");
-	}*/
+	navbar classe for fixing layout. Function checks the viewport size.*/
 	addNavbarClass();
 
 	function stickySidebar() {
@@ -81,12 +77,6 @@ function setupSidebar() {
 
 	function stickyNavbar() {
 
-		//add the navbar class if not there
-		/*if (!sidebar.classList.contains("navbar") && addClass){
-			sidebar.classList.add("navbar");
-			pageContent.classList.add("navbar");
-		}*/
-		
 		var scroll = getScroll();
 		var sidebarStyle = sidebar.style;
 		if(scroll >= sidebarY) {
@@ -213,7 +203,8 @@ function getViewportWidth(w) {
 	return d.body.clientWidth;
 }
 
-//classList polyfill
+//classList polyfill by Remy Sharp
+//https://github.com/remy
 function classListPolyfill() {
 
 	if (typeof window.Element === "undefined" || "classList" in document.documentElement) return;
