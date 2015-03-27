@@ -1,17 +1,16 @@
 
 (function(){
 
+//run polyfill
+classListPolyfill();
+
 //query the resources
 var sidebar = document.querySelector(".sticky-sidebar");
 var sidebarHeader = document.querySelector(".sticky-sidebar-header");
 var sidebarContent = document.querySelector(".sticky-sidebar-content");
 var pageContent = document.querySelector(".page-content");
 
-var navbarClassPrefix = detectCssTransform();
-
-//the only function that runs
 setupSidebar();
-
 
 function setupSidebar() {
 
@@ -31,6 +30,8 @@ function setupSidebar() {
 	/*User settings for the sidebar*/
 	var switchWidth = parseInt(sidebar.getAttribute("data-switch-width"), 10);
 	var addClass =  !(sidebar.getAttribute("data-optimize") === "true");
+
+	var navbarClassPrefix = detectCssTransform();
 
 	if(window.addEventListener){
 		window.addEventListener("scroll", stickySidebar, false);
@@ -169,15 +170,20 @@ function setupSidebar() {
 			pageContent.classList.remove("navbar" + navbarClassPrefix);
 		}
 	}
-}
 
-function detectCssTransform() {
-	if (sidebar.style.transform !== undefined && sidebar.style.transition !== undefined){
-		return ""; // no prefix when CSS transforms available
+	function detectCssTransform() {
+		if (sidebar.style.transform !== undefined && sidebar.style.transition !== undefined){
+			return ""; // no prefix when CSS transforms available
+		}
+
+		if(!addClass){
+			sidebar.classList.add("optimizePlain");
+		}
+		return "-plain";
 	}
-
-	return "-plain";
 }
+
+
 
 
 function getScroll(w) {
@@ -208,75 +214,74 @@ function getViewportWidth(w) {
 }
 
 //classList polyfill
-(function () {
+function classListPolyfill() {
 
-if (typeof window.Element === "undefined" || "classList" in document.documentElement) return;
+	if (typeof window.Element === "undefined" || "classList" in document.documentElement) return;
 
-var prototype = Array.prototype,
-    push = prototype.push,
-    splice = prototype.splice,
-    join = prototype.join;
+	var prototype = Array.prototype,
+	    push = prototype.push,
+	    splice = prototype.splice,
+	    join = prototype.join;
 
-function DOMTokenList(el) {
-  this.el = el;
-  // The className needs to be trimmed and split on whitespace
-  // to retrieve a list of classes.
-  var classes = el.className.replace(/^\s+|\s+$/g,'').split(/\s+/);
-  for (var i = 0; i < classes.length; i++) {
-    push.call(this, classes[i]);
-  }
-};
+	function DOMTokenList(el) {
+	  this.el = el;
+	  // The className needs to be trimmed and split on whitespace
+	  // to retrieve a list of classes.
+	  var classes = el.className.replace(/^\s+|\s+$/g,'').split(/\s+/);
+	  for (var i = 0; i < classes.length; i++) {
+	    push.call(this, classes[i]);
+	  }
+	};
 
-DOMTokenList.prototype = {
-  add: function(token) {
-    if(this.contains(token)) return;
-    push.call(this, token);
-    this.el.className = this.toString();
-  },
-  contains: function(token) {
-    return this.el.className.indexOf(token) != -1;
-  },
-  item: function(index) {
-    return this[index] || null;
-  },
-  remove: function(token) {
-    if (!this.contains(token)) return;
-    for (var i = 0; i < this.length; i++) {
-      if (this[i] == token) break;
-    }
-    splice.call(this, i, 1);
-    this.el.className = this.toString();
-  },
-  toString: function() {
-    return join.call(this, ' ');
-  },
-  toggle: function(token) {
-    if (!this.contains(token)) {
-      this.add(token);
-    } else {
-      this.remove(token);
-    }
+	DOMTokenList.prototype = {
+	  add: function(token) {
+	    if(this.contains(token)) return;
+	    push.call(this, token);
+	    this.el.className = this.toString();
+	  },
+	  contains: function(token) {
+	    return this.el.className.indexOf(token) != -1;
+	  },
+	  item: function(index) {
+	    return this[index] || null;
+	  },
+	  remove: function(token) {
+	    if (!this.contains(token)) return;
+	    for (var i = 0; i < this.length; i++) {
+	      if (this[i] == token) break;
+	    }
+	    splice.call(this, i, 1);
+	    this.el.className = this.toString();
+	  },
+	  toString: function() {
+	    return join.call(this, ' ');
+	  },
+	  toggle: function(token) {
+	    if (!this.contains(token)) {
+	      this.add(token);
+	    } else {
+	      this.remove(token);
+	    }
 
-    return this.contains(token);
-  }
-};
+	    return this.contains(token);
+	  }
+	};
 
-window.DOMTokenList = DOMTokenList;
+	window.DOMTokenList = DOMTokenList;
 
-function defineElementGetter (obj, prop, getter) {
-    if (Object.defineProperty) {
-        Object.defineProperty(obj, prop,{
-            get : getter
-        });
-    } else {
-        obj.__defineGetter__(prop, getter);
-    }
-}
+	function defineElementGetter (obj, prop, getter) {
+	    if (Object.defineProperty) {
+	        Object.defineProperty(obj, prop,{
+	            get : getter
+	        });
+	    } else {
+	        obj.__defineGetter__(prop, getter);
+	    }
+	}
 
-defineElementGetter(Element.prototype, 'classList', function () {
-  return new DOMTokenList(this);
-});
-
-})();//end polyfill
+	defineElementGetter(Element.prototype, 'classList', function () {
+	  return new DOMTokenList(this);
+	});
+}//end polyfill
 
 }()); // end sticky-sidebar
