@@ -1,0 +1,88 @@
+
+.page-content{
+	width: 75%;
+	float: left;
+}
+
+.sticky-sidebar{
+	width: 25%;
+	float: right;
+}
+
+.page-content.navbar{
+	float: none;
+	width: 100%;
+}
+
+.sticky-sidebar.navbar{
+	position: relative;
+	float: none;
+	width: 100%;
+	z-index: 1;
+}
+
+.sticky-sidebar.navbar .sticky-sidebar-header{
+ background-color: #ecf0f1;
+ padding: 5px;
+ min-height: 30px;
+}
+
+.sticky-sidebar.navbar .sticky-sidebar-header:after{
+	/* Three lines responsive icon */
+	content:"\2261";
+	float: right;
+	margin-right: 20px;
+	font-family: sans-serif;
+	font-weight: normal;
+	font-size: 40px;
+	line-height: 30px;
+}
+
+.sticky-sidebar.navbar .sticky-sidebar-content.plain{
+	/* if CSS transforms are not avaialble; simply toggle the display property*/
+	display: none;
+	position: absolute;
+	width: 100%;
+	background-color: #ecf0f1;
+
+	opacity: 1;
+	-webkit-transform: scaleY(1);
+		-ms-transform: scaleY(1);
+			transform: scaleY(1);
+}
+
+.sticky-sidebar.navbar .sticky-sidebar-content{
+	/*use these rules if CSS tranforms are detected*/
+	position: absolute;
+	width: 100%;
+	background-color: #ecf0f1;
+	
+	transition: transform 180ms ease-in-out,
+ 				opacity 180ms ease-in-out; 
+	opacity: 0;
+	-webkit-transform-origin:top;
+		-ms-transform-origin:top;
+			transform-origin:top;
+
+	-webkit-transform: scaleY(0);
+		-ms-transform: scaleY(0);
+			transform: scaleY(0);
+}
+
+.sticky-sidebar.navbar .sticky-sidebar-content.reveal{
+	opacity: 1;
+	-webkit-transform: scaleY(1);
+		-ms-transform: scaleY(1);
+			transform: scaleY(1);
+}
+
+
+
+.clearfix:after{
+	content: " ";
+	font-size: 0;
+	display: block;
+	visibility: hidden;
+	height: 0;
+	clear:both;
+}

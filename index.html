@@ -2,9 +2,250 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, width=device-width, height=device-height,target-densitydpi=device-dpi,user-scalable=yes" />
 	<title>sticky-sidebar</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/octicons.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/prism.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/sticky-sidebar.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/base.css">
 </head>
 <body>
-	<h1>Sticky sidebar repo page</h1>
+
+	<div class="header">
+		<h1>sticky-sidebar</h1>
+	</div>
+
+	<div class="main-wrapper clearfix">
+
+		<div class="sticky-sidebar" data-switch-width="768px" data-optimize="false">
+			<p class="sticky-sidebar-header">Navigation</p>
+			<div class="sticky-sidebar-content">
+				<p>Some sidebar content here</p>
+			</div>
+		</div> <!-- END STICKY SIDEBAR -->
+
+		<div class="page-content">
+			<div class="item" id="what-is-this">
+				<h2>What is this?</h2>
+
+				<p><span class="highlight">sticky-sidebar</span> is a plugin, written in vanilla JavaScript, using which you can add fully responsive sticky sidebars to your pages or the entire website.</p>
+
+				<p>A sticky sidebar looks like an ordinary sidebar but, remains visible as user scrolls the page. It offers excellent navigation for pages which have a lot of content, just like this documentation page. Try scrolling and notice how the sidebar stays on the screen but, when you scroll back to top it becomes a normal sidebar.</p>
+
+				<p><span class="highlight">sticky-sidebar</span> is fully responsive. When user switches to mobile view, it adapts and becomes the popular sticky navbar. Try resizing your browser to see how it responds to different screen sizes.</p>
+			</div> <!-- end item -->
+			
+			<div class="item">
+				<h2>Installing the plugin</h2>
+				<p>Include the <code class="language-markup">sticky-sidebar-min.css</code> and <code class="language-markup">sticky-sidebar-min.js</code> into your HTML</p>
+
+				<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;sticky-sidebar-min.css&quot;&gt;
+	&lt;!-- your stylesheets go here--&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	
+	&lt;script type=&quot;text/javascript&quot; src=&quot;stick-sidebar-min.js&quot;&gt;&lt;/script&gt;
+	&lt;!-- your scripts go here--&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+			</div>
+
+			<div class="item" id="markup">
+				<h2>The markup</h2>
+				<p>Since a sidebar is core part of the layout, the plugin will dictate you page's layout to some degree. Still, <span class="highlight">sticky-sidebar</span> only looks for the following markup</p>
+				
+<pre><code class="language-markup">
+&lt;div class=&quot;sticky-sidebar&quot; data-switch-width=&quot;768&quot;&gt;
+	&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;&lt;/h4&gt;
+	&lt;div class=&quot;sticky-sidebar-content&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;page-content&quot;&gt;&lt;/div&gt;</code></pre>
+				
+				<p>
+					The plugin divides the parent container into two parts.
+					<code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code> is the sticky sidebar container. It contains <code class="language-markup">&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;</code> ( I am using a <code class="language-markup">&lt;h4&gt;</code> tag. It could be any block level tag ) which carries sidebar and navbar's heading.
+
+					<p class="imp"><span class="octicon octicon-issue-opened"></span>If you don't want to use a sidebar heading, you can leave this tag empty. But you must have an element with class <code class="language-markup">sticky-sidebar-header</code> since it is targeted to insert the responsive icon in the mobile navbar layout mode.</p>
+
+					<code class="language-markup">&lt;div class=&quot;sticky-sidebar-content&quot;&gt;</code> will contain the actual sidebar content.
+				</p>
+
+				<p>
+					<code class="language-markup">&lt;div class=&quot;page-content&quot;&gt;</code> is where all the content of your page goes.
+				</p>
+
+				<p class="imp"><span class="octicon octicon-issue-opened"></span><code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code> must come before the <code class="language-markup">&lt;div class=&quot;page-content&quot;&gt;</code> in the markup.</p>
+
+			</div>
+
+			<div class="item"  id="layout">
+				<h2>The layout</h2>
+				<p>floats are used for doing the layout. Here is the exact CSS used</p>
+
+<pre><code class="language-css">
+/* For the sidebar layout */
+.page-content{
+	width: 75%;
+	float: left;
+}
+
+.sticky-sidebar{
+	width: 25%;
+	float: right;
+}
+
+/*For the navbar layout*/
+/*.navbar-plain is used by IE9 and IE8. When overriding,
+use the exact hooks as used here*/
+.page-content.navbar,
+.page-content.navbar-plain{
+	float: none;
+	width: 100%;
+}
+
+.sticky-sidebar.navbar,
+.sticky-sidebar.navbar-plain{
+	position: relative;
+	float: none;
+	width: 100%;
+	z-index: 1;
+}</code></pre>
+				<p>
+					The sidebar is floated right by default. Since we want the page to be responsive, percentage(%) widths are used. All these defaults can be easily overridden in your CSS by using the above hooks. 
+				</p>
+
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>The widths values are % of the parent container's, as defined by the user (<code class="language-markup">&lt;body&gt;</code> by default), width. Click here for the complete markup example.</p>
+
+			</div> <!-- end item -->
+
+			<div class="item" id="customizing">
+				<h2>Customize</h2>
+
+				<h3>Setting mobile layout width</h3>
+				<p><code class="language-markup">data-switch-width</code> is used to specify the width(in pixels) at which page changes to the mobile layout. When the attribute is not provided, the page remains with the sticky sidebar at all screen widths. The sidebar's width still adjusts since a percentage(%) value is used.</p>
+
+				<h3>Changing sticky navbar's colors</h3>
+				<p>Some default background color has been added to the navbar's styles so that it works out of the box. You can use the following CSS selectors to override those in your CSS file.</p>
+				<pre><code class="language-css">
+.sticky-sidebar.navbar .sticky-sidebar-header{
+	/* navbar's header */
+	background-color: #your-color-here;
+}
+
+.sticky-sidebar.navbar .sticky-sidebar-header:after{
+	/* 3 dashed responsive icon */
+
+}
+
+/* use the exact selector */
+.sticky-sidebar.navbar .sticky-sidebar-content,
+.sticky-sidebar.navbar .sticky-sidebar-content.plain {
+	/* navbar's menu which is toggled on tapping */
+
+}</code></pre>
+			</div> <!-- end item -->
+
+			<div class="item">
+				<h2>Optimize using media queries</h2>
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>This part in optional and uses CSS3 media queries. If you don't understand how media queries work; just skip this and use the plugin as described above.</p>
+
+				<p><span class="highlight">sticky-sidebar</span> handles the mobile layout by adding <code class="language-markup">navbar</code> class using <code class="language-javascript">window.resize</code> event. But the layout is handled best by CSS and for responsive mobile layouts we use CSS3 Media Queries.</p>
+
+				<p>Using Media Queries imporves the performance by reducing the amount of JavaScript code that runs to handle mobile layout. It also makes the CSS code simpler and more easy to edit and maintian. I strongly recommend using <span class="highlight">sticky-sidebar</span> plugin with media queries.</p>
+
+				<p>Use the following steps to setup <span class="highlight">sticky-sidebar</span> plugin, from start, to use media queries.</p>
+
+				
+				<p><span class="list-number">1. </span>Add and set <code class="language-markup">data-optimize = "true"</code> to the <code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code>. This attribute tells the plugin that the layout will be handled by the user. The basic markup now looks like this</p>
+				<pre><code class="language-markup">
+&lt;div class=&quot;sticky-sidebar&quot; data-switch-width=&quot;768&quot; data-optimize=&quot;true&quot;&gt;
+	&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;&lt;/h4&gt;
+	&lt;div class=&quot;sticky-sidebar-content&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;page-content&quot;&gt;&lt;/div&gt;</code></pre>
+				
+				<p><span class="list-number">2. </span>Open the CSS file <code class="language-markup">sticky-sidebar-opt.css</code> and copy all the CSS code from that file to "your" basic CSS file that you are using for the page. This code already contains the media query that we need.</p>
+
+				<p><span class="list-number">3. </span>Set the media query's width equal to that of the <code class="language-markup">data-switch-width</code> attribute of the <code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code>. The media query for <code class="language-markup">data-switch-width=&quot;768&quot;</code> will then look something like this</p>
+
+				<pre><code class="language-css">
+@media screen and (max-width: 768px){
+	....
+}</code></pre>
+				<p><span class="list-number">4. </span>And we are done. Now, plugin CSS is exposed to you which can be easily edited. We improved the performace of the plugin by reducing the JS code being run. We also reduced one extra request for the seperate CSS file.</p>
+
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>Don't try to link the <code class="language-markup">sticky-sidebar-opt.css</code> file. You have to copy the code, otherwise it causes the selector specificity issues when we cutomize the sidebar.</p>
+
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>Remove the link tag for <code class="language-markup">sticky-sidebar-min.css</code> if you have it in your markup. We don't need that file. The code copied has all CSS you need.</p>
+
+
+			</div><!-- end item -->
+
+			<div class="item">
+				<h2>Complete markup example</h2>
+				<p>Here is skeleton of the markup used for this documentation page. This may help to clarify the above points and examples</p>
+
+				<pre><code class="language-markup">
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;sticky-sidebar-min.css&quot;&gt;
+	&lt;!-- your stylesheets go here--&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;div class=&quot;header&quot;&gt;&lt;/div&gt;
+
+	&lt;div class=&quot;main-wrapper clearfix&quot;&gt;
+
+		&lt;div class=&quot;sticky-sidebar&quot; data-switch-width=&quot;768&quot;&gt;
+
+			&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;&lt;/h4&gt;
+
+			&lt;div class=&quot;sticky-sidebar-content&quot;&gt;&lt;/div&gt;
+
+		&lt;/div&gt; &lt;!-- END STICKY SIDEBAR--&gt;
+
+		&lt;div class=&quot;page-content&quot;&gt; &lt;/div&gt;
+
+	&lt;/div&gt;&lt;!-- END MAIN WRAPPER--&gt;
+
+	&lt;div class=&quot;footer&quot;&gt;&lt;/div&gt;
+
+	&lt;script type=&quot;text/javascript&quot; src=&quot;stick-sidebar-min.js&quot;&gt;&lt;/script&gt;
+	&lt;!-- your scripts go here--&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+				
+				<p>Now we can use the <code class="language-markup">main-wrapper</code> to center our content. You should also add the clearfix class(CSS is already included in the plugin. Just have to add the class) to the <code class="language-markup">main-wrapper</code> since floats cause the parent to collapse and have zero height. Here is the CSS</p>
+
+				<pre><code class="language-css">
+.main-wrapper{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+</code></pre>
+			</div>
+
+		</div> <!-- END PAGE CONTENT -->
+
+	</div> <!-- END MAIN WRAPPER -->
+
+	<div class="footer">
+		<p>This is the footer content</p>
+	</div>
+
+	<script type="text/javascript" src="scripts/prism.js"></script>
+	<script type="text/javascript" src="scripts/velocity.min.js"></script>
+	<script type="text/javascript" src="scripts/sticky-sidebar.js"></script>
+	<script type="text/javascript" src="scripts/base.js"></script>
 </body>
 </html>
