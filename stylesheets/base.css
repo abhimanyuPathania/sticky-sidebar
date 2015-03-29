@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 
-/* TYPOGRAPHY */
+/* BASIC TYPOGRAPHY */
 body{
 	font-family: 'Open Sans', Helvetica, sans-serif;
 	font-weight: 300;
@@ -31,11 +31,29 @@ h4{
 	font-size: 1.2em
 }
 
-
-
+/* COLOR SCHEME */
+/* */
 
 .header{
 
+}
+
+.header p {
+	
+}
+
+.item pre{
+
+}
+
+.item p code{
+
+}
+
+/* BASIC LAYOUT*/
+
+.header{
+	
 }
 
 .main-wrapper{
@@ -47,36 +65,120 @@ h4{
 	
 }
 
-.sticky-sidebar.navbar .sticky-sidebar-header{
-	/* navbar's header */
-	background-color: #3498db;
-	color: #fff;
+/* GENERAL SPACING RULES*/
+
+/* HEADER */
+.header{
+	padding: 40px 20px;
+	font-size: 2em;
 }
 
-.sticky-sidebar.navbar .sticky-sidebar-header:after{
-	/* 3 dashed responsive icon */
-	color: red;
+.header h1{
+	
+}
+
+/* PAGE CONTENT */
+
+.item p {
+	margin: 18px 0px;
+}
+
+.item pre{
+	margin: 25px 0px;
+}
+
+/******************************  STICKY SIDEBAR COPIED CODE ******************************/
+
+
+.page-content{
+	width: 75%;
 	float: left;
 }
 
-/* use the exact selector */
-.sticky-sidebar.navbar .sticky-sidebar-content,
-.sticky-sidebar.navbar .sticky-sidebar-content.plain {
-	/* navbar's menu which is toggled on tapping */
-	background-color: #3498db;
-	color: #fff;
+.sticky-sidebar{
+	width: 25%;
+	float: right;
 }
 
-
-
-/* @media screen and (max-width: 768px){
+/* Value of max-width(here 590px for example) should be 
+	same as that of the data-switch-width that you set. ; */
+@media screen and (max-width: 768px){
 	.page-content{
-		width: 100%;
 		float: none;
+		width: 100%;
 	}
 
 	.sticky-sidebar{
-		width: 100%;
+		position: relative;
 		float: none;
+		width: 100%;
+		z-index: 1;
 	}
-} */
+
+	.sticky-sidebar .sticky-sidebar-header{
+		background-color: #ecf0f1;
+		padding: 5px;
+		min-height: 30px;
+	}
+
+	.sticky-sidebar .sticky-sidebar-header:after{
+		content:"\2261";
+		float: right;
+		margin-right: 20px;
+		font-family: sans-serif;
+		font-weight: normal;
+		font-size: 40px;
+		line-height: 30px;
+	}
+
+	.sticky-sidebar .sticky-sidebar-content{
+		/*use these rules if CSS tranforms are detected*/
+		position: absolute;
+		width: 100%;
+		background-color: #ecf0f1;
+		
+		transition: transform 180ms ease-in-out,
+	 				opacity 180ms ease-in-out; 
+		opacity: 0;
+		-webkit-transform-origin:top;
+			-ms-transform-origin:top;
+				transform-origin:top;
+
+		-webkit-transform: scaleY(0);
+			-ms-transform: scaleY(0);
+				transform: scaleY(0);
+	}
+
+	.sticky-sidebar .sticky-sidebar-content.reveal{
+		opacity: 1;
+		-webkit-transform: scaleY(1);
+			-ms-transform: scaleY(1);
+				transform: scaleY(1);
+	}
+
+
+	.sticky-sidebar.optimizePlain .sticky-sidebar-content{
+		/* if CSS transforms are not avaialble; simply toggle the display property*/
+		display: none;
+		position: absolute;
+		width: 100%;
+		background-color: #ecf0f1;
+		opacity: 1;
+
+
+		-webkit-transform: none;
+			-ms-transform: none;
+				transform: none;
+	}
+
+} 
+
+
+.clearfix:after{
+	content: " ";
+	font-size: 0;
+	display: block;
+	visibility: hidden;
+	height: 0;
+	clear:both;
+}

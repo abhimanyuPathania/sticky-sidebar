@@ -6,38 +6,53 @@
 	<title>sticky-sidebar</title>
 	<link rel="stylesheet" type="text/css" href="stylesheets/octicons.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/prism.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/sticky-sidebar.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/base.css">
 </head>
 <body>
 
 	<div class="header">
 		<h1>sticky-sidebar</h1>
+		<p>A responsive sticky sidebar-navbar</p>
 	</div>
 
 	<div class="main-wrapper clearfix">
 
-		<div class="sticky-sidebar" data-switch-width="768px" data-optimize="false">
+		<div class="sticky-sidebar" data-switch-width="768px" data-optimize="true">
 			<p class="sticky-sidebar-header">Navigation</p>
 			<div class="sticky-sidebar-content">
-				<p>Some sidebar content here</p>
+				<ul>
+					<li><a href="#what">What is this?</a></li>
+					<li><a href="#install">Installation</a></li>
+					<li><a href="#markup">Markup</a></li>
+					<li><a href="#layout">Layout</a></li>
+					<li>
+						<a href="#customize">Customize</a>
+						<ul>
+							<li><a href="#mobileLayout">Mobile view width</a></li>
+							<li><a href="#navbarColor">Navbar colors</a></li>
+						</ul>
+					</li>
+					<li><a href="#optimize">Optimize</a></li>
+					<li><a href="#example">Example</a></li>
+					<li><a href="#what">Back top</a></li>
+				</ul>
 			</div>
 		</div> <!-- END STICKY SIDEBAR -->
 
 		<div class="page-content">
-			<div class="item" id="what-is-this">
+			<div class="item" id="what">
 				<h2>What is this?</h2>
 
 				<p><span class="highlight">sticky-sidebar</span> is a plugin, written in vanilla JavaScript, using which you can add fully responsive sticky sidebars to your pages or the entire website.</p>
 
-				<p>A sticky sidebar looks like an ordinary sidebar but, remains visible as user scrolls the page. It offers excellent navigation for pages which have a lot of content, just like this documentation page. Try scrolling and notice how the sidebar stays on the screen but, when you scroll back to top it becomes a normal sidebar.</p>
+				<p>A sticky sidebar looks like an ordinary sidebar but, remains visible as user scrolls the page. It offers excellent navigation for pages, just like this documentation page, which have a lot of content. Try scrolling and notice how the sidebar stays on the screen but, when you scroll back to top it becomes a normal sidebar.</p>
 
 				<p><span class="highlight">sticky-sidebar</span> is fully responsive. When user switches to mobile view, it adapts and becomes the popular sticky navbar. Try resizing your browser to see how it responds to different screen sizes.</p>
 			</div> <!-- end item -->
 			
-			<div class="item">
+			<div class="item" id="install">
 				<h2>Installing the plugin</h2>
-				<p>Include the <code class="language-markup">sticky-sidebar-min.css</code> and <code class="language-markup">sticky-sidebar-min.js</code> into your HTML</p>
+				<p>Include the <code class="language-markup">sticky-sidebar-min.css</code> and <code class="language-markup">sticky-sidebar-min.js</code> into your HTML and the plugin is ready to be used.</p>
 
 				<pre><code class="language-markup">
 &lt;!DOCTYPE html&gt;
@@ -69,7 +84,7 @@
 				
 				<p>
 					The plugin divides the parent container into two parts.
-					<code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code> is the sticky sidebar container. It contains <code class="language-markup">&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;</code> ( I am using a <code class="language-markup">&lt;h4&gt;</code> tag. It could be any block level tag ) which carries sidebar and navbar's heading.
+					<code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code> is the sticky sidebar container. It contains <code class="language-markup">&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;</code> (I am using an <code class="language-markup">&lt;h4&gt;</code> tag. It could be any block level element) which carries sidebar and navbar's heading.
 
 					<p class="imp"><span class="octicon octicon-issue-opened"></span>If you don't want to use a sidebar heading, you can leave this tag empty. But you must have an element with class <code class="language-markup">sticky-sidebar-header</code> since it is targeted to insert the responsive icon in the mobile navbar layout mode.</p>
 
@@ -86,7 +101,7 @@
 
 			<div class="item"  id="layout">
 				<h2>The layout</h2>
-				<p>floats are used for doing the layout. Here is the exact CSS used</p>
+				<p>CSS floats are used for doing the layout. Here is the exact CSS as used in plugin</p>
 
 <pre><code class="language-css">
 /* For the sidebar layout */
@@ -101,16 +116,12 @@
 }
 
 /*For the navbar layout*/
-/*.navbar-plain is used by IE9 and IE8. When overriding,
-use the exact hooks as used here*/
-.page-content.navbar,
-.page-content.navbar-plain{
+.page-content.navbar{
 	float: none;
 	width: 100%;
 }
 
-.sticky-sidebar.navbar,
-.sticky-sidebar.navbar-plain{
+.sticky-sidebar.navbar{
 	position: relative;
 	float: none;
 	width: 100%;
@@ -120,17 +131,17 @@ use the exact hooks as used here*/
 					The sidebar is floated right by default. Since we want the page to be responsive, percentage(%) widths are used. All these defaults can be easily overridden in your CSS by using the above hooks. 
 				</p>
 
-				<p class="imp"><span class="octicon octicon-issue-opened"></span>The widths values are % of the parent container's, as defined by the user (<code class="language-markup">&lt;body&gt;</code> by default), width. Click here for the complete markup example.</p>
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>The widths values are % of the parent container's, as defined by the user (<code class="language-markup">&lt;body&gt;</code> by default), width. <a href="#example">Here</a> is an example showing complete markup.</p>
 
 			</div> <!-- end item -->
 
-			<div class="item" id="customizing">
+			<div class="item" id="customize">
 				<h2>Customize</h2>
 
-				<h3>Setting mobile layout width</h3>
+				<h3 id="mobileLayout">Setting mobile view width</h3>
 				<p><code class="language-markup">data-switch-width</code> is used to specify the width(in pixels) at which page changes to the mobile layout. When the attribute is not provided, the page remains with the sticky sidebar at all screen widths. The sidebar's width still adjusts since a percentage(%) value is used.</p>
 
-				<h3>Changing sticky navbar's colors</h3>
+				<h3 id="navbarColor">Changing sticky navbar's colors</h3>
 				<p>Some default background color has been added to the navbar's styles so that it works out of the box. You can use the following CSS selectors to override those in your CSS file.</p>
 				<pre><code class="language-css">
 .sticky-sidebar.navbar .sticky-sidebar-header{
@@ -151,13 +162,13 @@ use the exact hooks as used here*/
 }</code></pre>
 			</div> <!-- end item -->
 
-			<div class="item">
+			<div class="item" id="optimize">
 				<h2>Optimize using media queries</h2>
-				<p class="imp"><span class="octicon octicon-issue-opened"></span>This part in optional and uses CSS3 media queries. If you don't understand how media queries work; just skip this and use the plugin as described above.</p>
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>This part is optional and uses CSS3 Media Queries. If you don't understand how media queries work; just skip this and use the plugin as described above.</p>
 
-				<p><span class="highlight">sticky-sidebar</span> handles the mobile layout by adding <code class="language-markup">navbar</code> class using <code class="language-javascript">window.resize</code> event. But the layout is handled best by CSS and for responsive mobile layouts we use CSS3 Media Queries.</p>
+				<p><span class="highlight">sticky-sidebar</span> handles the mobile layout by adding the <code class="language-markup">navbar</code> class using <code class="language-javascript">window.resize</code> event. But the layout is best handled by CSS and for responsive mobile layouts we use the CSS3 Media Queries.</p>
 
-				<p>Using Media Queries imporves the performance by reducing the amount of JavaScript code that runs to handle mobile layout. It also makes the CSS code simpler and more easy to edit and maintian. I strongly recommend using <span class="highlight">sticky-sidebar</span> plugin with media queries.</p>
+				<p>Using Media Queries improves the performance by reducing the amount of JavaScript code that runs to handle the mobile layout. It also makes the CSS code simpler and more easy to edit and maintain. I strongly recommend using <span class="highlight">sticky-sidebar</span> plugin with media queries.</p>
 
 				<p>Use the following steps to setup <span class="highlight">sticky-sidebar</span> plugin, from start, to use media queries.</p>
 
@@ -171,7 +182,7 @@ use the exact hooks as used here*/
 
 &lt;div class=&quot;page-content&quot;&gt;&lt;/div&gt;</code></pre>
 				
-				<p><span class="list-number">2. </span>Open the CSS file <code class="language-markup">sticky-sidebar-opt.css</code> and copy all the CSS code from that file to "your" basic CSS file that you are using for the page. This code already contains the media query that we need.</p>
+				<p><span class="list-number">2. </span>Open the CSS file <code class="language-markup">sticky-sidebar-opt.css</code> that is included in the plugin. Copy all the CSS code from that file into "your" basic CSS file that you are using for the page. This code already contains the media query that we need.</p>
 
 				<p><span class="list-number">3. </span>Set the media query's width equal to that of the <code class="language-markup">data-switch-width</code> attribute of the <code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code>. The media query for <code class="language-markup">data-switch-width=&quot;768&quot;</code> will then look something like this</p>
 
@@ -179,18 +190,18 @@ use the exact hooks as used here*/
 @media screen and (max-width: 768px){
 	....
 }</code></pre>
-				<p><span class="list-number">4. </span>And we are done. Now, plugin CSS is exposed to you which can be easily edited. We improved the performace of the plugin by reducing the JS code being run. We also reduced one extra request for the seperate CSS file.</p>
+				<p><span class="list-number">4. </span>And we are done. Now the plugin's CSS is exposed to you which could be easily edited. We improved the performance of the plugin by reducing the JS code being run. We also reduced one extra HTTP request for the separate CSS file.</p>
 
-				<p class="imp"><span class="octicon octicon-issue-opened"></span>Don't try to link the <code class="language-markup">sticky-sidebar-opt.css</code> file. You have to copy the code, otherwise it causes the selector specificity issues when we cutomize the sidebar.</p>
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>Don't try to link the <code class="language-markup">sticky-sidebar-opt.css</code> file. You have to copy the code, otherwise it causes the selector specificity issues when we customize the sidebar.</p>
 
-				<p class="imp"><span class="octicon octicon-issue-opened"></span>Remove the link tag for <code class="language-markup">sticky-sidebar-min.css</code> if you have it in your markup. We don't need that file. The code copied has all CSS you need.</p>
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>Remove the link tag for <code class="language-markup">sticky-sidebar-min.css</code> if you have it in your markup. We don't need that file. The code copied has all the CSS you need.</p>
 
 
 			</div><!-- end item -->
 
-			<div class="item">
+			<div class="item" id="example">
 				<h2>Complete markup example</h2>
-				<p>Here is skeleton of the markup used for this documentation page. This may help to clarify the above points and examples</p>
+				<p>Here is the skeleton of the markup used for this documentation page. This may help to clarify the above points and examples.</p>
 
 				<pre><code class="language-markup">
 &lt;!DOCTYPE html&gt;
@@ -225,7 +236,7 @@ use the exact hooks as used here*/
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
 				
-				<p>Now we can use the <code class="language-markup">main-wrapper</code> to center our content. You should also add the clearfix class(CSS is already included in the plugin. Just have to add the class) to the <code class="language-markup">main-wrapper</code> since floats cause the parent to collapse and have zero height. Here is the CSS</p>
+				<p>Now we can use the <code class="language-markup">main-wrapper</code> to center our content. You should also add the clearfix class (CSS is already included in the plugin. Just have to add the class) to the <code class="language-markup">main-wrapper</code> since floats cause the parent to collapse and have zero height. Here is the CSS for the parent</p>
 
 				<pre><code class="language-css">
 .main-wrapper{
