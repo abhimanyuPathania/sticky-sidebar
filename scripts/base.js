@@ -15,7 +15,7 @@ function scrollToLink(e){
 	Velocity(targetElement, "scroll", {
 		duration: 400,
 		easing: "ease-in-out",
-		offset: -30,
+		offset: -10
 	}); 
 
 	
