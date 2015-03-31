@@ -46,6 +46,11 @@ h4{
 }
 
 /* COLOR SCHEME AND BACKGROUNDS*/
+
+a.active {
+	color: red;
+}
+
 code[class*="language-"], pre[class*="language-"]{
 	text-shadow: none;
 }
@@ -176,6 +181,7 @@ body{
 	font-size: 1.1em;
 }
 
+
 /* STICKY SIDEBAR*/
 .sticky-sidebar{
 	padding-top: 20px;
@@ -191,6 +197,10 @@ body{
 
 .sticky-sidebar-content > ul > li > ul li {
 	margin-top: 5px;
+}
+
+.inner-list {
+	display: none;
 }
 
 /******************************  STICKY SIDEBAR COPIED CODE ******************************/
