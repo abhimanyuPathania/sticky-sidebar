@@ -1,4 +1,7 @@
 
+(function(){
+
+
 var sidebarContent = document.querySelector(".sticky-sidebar-content");
 var mainListLinks = document.querySelectorAll(".main-list > li > a");
 var innerList = document.querySelector(".inner-list");
@@ -9,7 +12,8 @@ var animating = false;
 
 setupActiveLink();
 sidebarContent.addEventListener("click", scrollToLink, false);
-window.addEventListener("scroll", addActiveClass, false); 
+window.addEventListener("scroll", addActiveClass, false);
+window.addEventListener("resize", addActiveClass. false); 
 
 function setupActiveLink() {
 	for( var i = 0, len = mainListLinks.length; i < len-1; i+=1 ){
@@ -22,11 +26,11 @@ function setupActiveLink() {
 }
 
 function addActiveClass() {
-	if (window.innerWidth < 768 || animating) {
+	if (window.innerWidth <= 768 || animating) {
 		return false;
 	}
 
-	//console.log("addActiveClass");
+	console.log("addActiveClass");
 	for (var i=0, len = itemDivKeys.length; i < len; i+=1) {
 		var itemDiv = activeLinkObj[itemDivKeys[i]].div;
 		var box = itemDiv.getBoundingClientRect();
@@ -89,20 +93,22 @@ function scrollToLink(e){
 		return false;
 	}
 
+	var offset = (window.innerWidth <= 768 ? -50: -10);
+	var duration = (window.innerWidth <= 768 ? 240: 400);
 	if (!(targetId in activeLinkObj)){
 		var innerLinkTarget = document.querySelector(targetId);
 		Velocity(innerLinkTarget, "scroll", {
 			duration: 200,
 			easing: "ease-in-out",
-			offset: -10,
+			offset: offset,
 		});
 	} else{
 		var targetElement = activeLinkObj[targetId].div;
 		var linkClicked = activeLinkObj[targetId].link;
 		Velocity(targetElement, "scroll", {
-			duration: 400,
+			duration: duration,
 			easing: "ease-in-out",
-			offset: -10,
+			offset: offset,
 			begin: beforeAnimation,
 			complete: afterAnimation
 		});
@@ -165,3 +171,5 @@ function getScroll(w) {
 	// For browsers in Quirks mode
 	return d.body.scrollTop ;
 }
+
+}());

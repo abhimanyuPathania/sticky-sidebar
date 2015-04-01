@@ -4,6 +4,33 @@
 	box-sizing: border-box;
 }
 
+/* OCTICONS */
+
+@font-face {
+  font-family: 'octicons';
+  src: url('octicons.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.octicon, .mega-octicon {
+  font: normal normal normal 16px/1 octicons;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.octicon-issue-opened:before { content: '\f026'} /*  */
+.octicon-arrow-up:before { content: '\f03d'} /*  */
+.octicon-mark-github:before { content: '\f00a'} /*  */
+
+
 /* BASIC TYPOGRAPHY */
 body{
 	font-family: 'Open Sans', Helvetica, sans-serif;
@@ -47,20 +74,35 @@ h4{
 
 /* COLOR SCHEME AND BACKGROUNDS*/
 
-a.active {
-	color: red;
-}
 
 code[class*="language-"], pre[class*="language-"]{
 	text-shadow: none;
 }
 body{
-	background-color: #ececec; /* backup value*/
+	background-color: #ececec; /*backup value*/
 	background-image: url(../images/square.png);
 }
 
-.page-content{
+.sticky-sidebar a{
+	color: #3498db;
 
+	transition-property: color, text-shadow, font-size;
+	transition-timing-function: ease-in-out;
+   	transition-duration: 100ms;
+}
+
+.sticky-sidebar a:hover{
+	color: #2980B9;
+}
+
+.sticky-sidebar a.active {
+	color: #2980B9;
+	text-shadow: 0px 0px 10px rgba(52, 152, 219, 0.95);
+	font-size: 1.1em;
+}
+.sticky-sidebar-header{
+	color: #E74C3C;
+	text-shadow: 0px 0px 5px rgba(231, 76, 60, 0.8);
 }
 
 .item{
@@ -70,12 +112,17 @@ body{
 
 .header{
 	background-color: #E74C3C;
-	color: #ecf0f1;
 	color: #FFF;
 }
 
 .header p {
 	
+}
+
+.highlight{
+	color: #e74c3c;
+	font-weight: 400;
+	text-shadow: 0px 0px 2px rgba(231, 76, 60,0.4)
 }
 
 .item h2{
@@ -94,6 +141,16 @@ body{
 	color: #444;
 }
 
+.item p a{
+	color: #e74c3c;
+	font-weight: 400;
+	
+}
+
+.item p a:hover{
+	text-decoration: underline;
+}
+
 .item h2{
 	color: #3498DB;
 }
@@ -102,9 +159,6 @@ body{
 	color: #2980B9;
 }
 
-.imp{
-	
-}
 
 .imp .octicon {
 	text-shadow: 0px 0px 2px #FF96B7;
@@ -116,19 +170,36 @@ body{
 	text-shadow: 0px 0px 1px #3498db;
 }
 
+.footer{
+	background-color: #ececec;
+	border-top: 1px solid #D4D2D3;
+}
+
+.footer .octicon{
+	color: #e74c3c;
+	text-shadow: 0px 0px 5px #e74c3c;
+
+	transition-property: text-shadow, color;
+	transition-duration: 250ms;
+	transition-timing-function: ease-in-out;
+}
+
+.footer .octicon:hover{
+	color: #c0392b;
+	text-shadow: 0px 0px 10px #c0392b;
+	cursor: pointer;
+}
+
 /* BASIC LAYOUT*/
 
-.header{
-	
+.header-wrapper{
+	max-width: 1100px;
+	margin: 0 auto;
 }
 
 .main-wrapper{
 	max-width: 1100px;
 	margin: 0 auto;
-}
-
-.footer{
-	
 }
 
 
@@ -141,10 +212,6 @@ body{
 	font-size: 2em;
 }
 
-.header h1{
-	
-}
-
 /* PAGE CONTENT */
 .main-wrapper{
 	margin-top: 40px;
@@ -154,8 +221,7 @@ body{
 	padding-top: 20px;
 }
 .item{
-	padding: 0px 20px;
-	padding-top: 20px;
+	padding: 20px  20px 10px 20px;
 	border-radius: 8px;
 	margin-bottom: 30px;
 }
@@ -187,6 +253,25 @@ body{
 .sticky-sidebar{
 	padding-top: 20px;
 }
+
+.sticky-sidebar a{
+	font-weight: 400;
+}
+
+.sticky-sidebar .octicon{
+	font-size: 1.2em;
+	margin-right: 5px;
+}
+
+.sticky-sidebar-header{
+	margin-left: 20px;
+	margin-bottom: 10px;
+
+	font-size: 1.25em;
+	font-weight: 400;
+	margin-top: -5px;
+}
+
 .sticky-sidebar ul{
 	list-style: none;
 	margin-left: 20px;
@@ -204,6 +289,21 @@ body{
 	display: none;
 }
 
+.footer{
+	margin-top: 40px;
+	text-align: center;
+	padding: 10px 0px;
+	font-weight: 400;
+}
+
+.footer p:nth-of-type(2){
+	margin-top: 5px;
+}
+
+.footer .octicon{
+	font-size: 32px;
+}
+
 /******************************  STICKY SIDEBAR COPIED CODE ******************************/
 
 
@@ -217,12 +317,17 @@ body{
 	float: right;
 }
 
-/* Value of max-width(here 590px for example) should be 
-	same as that of the data-switch-width that you set. ; */
+@media screen and (min-width: 769px) and (max-width: 1100px){
+	.main-wrapper{
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+}
+
 @media screen and (max-width: 768px){
 	.page-content{
 		float: none;
-		width: 100%;
+		width: 97%;
 	}
 
 	.sticky-sidebar{
@@ -232,13 +337,14 @@ body{
 		z-index: 1;
 	}
 
-	.sticky-sidebar .sticky-sidebar-header{
+/*----*/
+	.sticky-sidebar-header{
 		background-color: #ecf0f1;
 		padding: 5px;
 		min-height: 30px;
 	}
 
-	.sticky-sidebar .sticky-sidebar-header:after{
+	.sticky-sidebar-header:after{
 		content:"\2261";
 		float: right;
 		margin-right: 20px;
@@ -248,15 +354,15 @@ body{
 		line-height: 30px;
 	}
 
-	.sticky-sidebar .sticky-sidebar-content{
+	.sticky-sidebar-content{
 		/*use these rules if CSS tranforms are detected*/
 		position: absolute;
 		width: 100%;
 		background-color: #ecf0f1;
 		
 		transition: transform 180ms ease-in-out,
-	 				opacity 180ms ease-in-out; 
-		opacity: 0;
+	 				opacity 180ms ease-in-out;
+	 	opacity: 0;
 		-webkit-transform-origin:top;
 			-ms-transform-origin:top;
 				transform-origin:top;
@@ -266,13 +372,13 @@ body{
 				transform: scaleY(0);
 	}
 
-	.sticky-sidebar .sticky-sidebar-content.reveal{
-		opacity: 1;
+	.sticky-sidebar-content.reveal{ 
+		opacity: 1; 
 		-webkit-transform: scaleY(1);
 			-ms-transform: scaleY(1);
 				transform: scaleY(1);
 	}
-
+/*----*/
 
 	.sticky-sidebar.optimizePlain .sticky-sidebar-content{
 		/* if CSS transforms are not avaialble; simply toggle the display property*/
@@ -280,7 +386,7 @@ body{
 		position: absolute;
 		width: 100%;
 		background-color: #ecf0f1;
-		opacity: 1;
+		opacity: 1; 
 
 
 		-webkit-transform: none;
@@ -288,7 +394,134 @@ body{
 				transform: none;
 	}
 
+
+	/* Base.css media queries */
+
+	.header{
+		font-size: 1.8em;
+		font-size: 5vw;
+
+		text-align: center;
+		padding: 25px 15px;
+	}
+
+	.main-wrapper{
+		box-sizing: border-box;
+		margin-top: 0px;
+	}
+
+
+
+	.sticky-sidebar{
+		padding-top: 0px;
+	}
+	
+	.sticky-sidebar a{
+		color: #FFF;
+	}
+
+	.sticky-sidebar a:hover{
+		color:  #FFF;
+	}
+
+	.sticky-sidebar a.active {
+		color: #FFF;
+		text-shadow: 0px 0px 10px rgba(255, 2555, 255, 0.98);
+		font-size: 1.1em;
+	}
+
+	.sticky-sidebar-header{
+		padding: 10px 0px 10px 20px;
+		margin: 0px;
+		background-color: #3498db;
+		color: #FFF;
+		text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
+	}
+	
+	.sticky-sidebar-content{
+		border-top: 2px solid #FFF;
+		background-color: #3498db;
+		padding-top: 10px;
+	}
+
+	.sticky-sidebar-content.reveal{
+		opacity: 0.9;
+	}
+
+	.sticky-sidebar-content > ul > li {
+		margin-bottom: 8px;
+	}
+
+	.sticky-sidebar-content > ul > li > ul li {
+		margin-top: 4px;
+	}
+
+	.sticky-sidebar-content > ul{
+		font-size: 1.1em;
+	}
+
+	.sticky-sidebar-content > ul > li >ul{
+		font-size: 1em;
+	}
+
+
+	.page-content{
+		box-sizing: border-box;
+		padding-top: 0px;
+		margin: 40px auto;
+	}
+	
+	.item{
+		padding: 10px 10px 0px
+	}
+
+	h2{
+		font-size: 1.5em;
+	}
+	
+	.item h2{
+		padding-bottom: 10px;
+	}
+
+	.item p{
+		margin: 12px 0px;
+	}
+
+	.item pre{
+		margin: 18px 0px;
+	}
+	
+	h3{
+		font-size: 1.3em
+	}
+
+	.item h3{
+		margin-top: 8px;
+	}
+
 } 
+
+@media screen and (max-width: 530px){
+	body{
+		font-size: 17px;
+	}
+	.header h1{
+		font-size: 2em;
+		font-size: 14vw;
+	}
+
+	.header p {
+		font-size: 1em;
+		font-size: 5.5vw;
+	}
+}
+
+
+@media screen and (max-width: 360px){
+	body{
+		font-size: 16px;
+	}
+}
 
 
 .clearfix:after{

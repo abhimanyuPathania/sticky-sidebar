@@ -4,24 +4,27 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, width=device-width, height=device-height,target-densitydpi=device-dpi,user-scalable=yes" />
 	<title>sticky-sidebar</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/octicons.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="stylesheets/prism.css">
-	<link rel="stylesheet" type="text/css" href="stylesheets/base.css">
+	<link rel="stylesheet" type="text/css" href="stylesheets/base-min.css">
 </head>
 <body>
 
 	<div class="header">
-		<h1>sticky-sidebar</h1>
-		<p>A responsive sticky sidebar-navbar</p>
+		<div class="header-wrapper">
+			<h1>sticky-sidebar</h1>
+			<p>A responsive sticky sidebar-navbar</p>
+		</div>
 	</div>
 
 	<div class="main-wrapper clearfix">
 
 		<div class="sticky-sidebar" data-switch-width="768px" data-optimize="true">
-			<p class="sticky-sidebar-header"></p>
+			<p class="sticky-sidebar-header">Navigation</p>
 			<div class="sticky-sidebar-content">
 				<ul class="main-list">
 					<li><a href="#what">What is this?</a></li>
+					<li><a href="#download">Download</a></li>
 					<li><a href="#install">Installation</a></li>
 					<li><a href="#markup">Markup</a></li>
 					<li><a href="#layout">Layout</a></li>
@@ -34,7 +37,7 @@
 					</li>
 					<li><a href="#optimize">Optimize</a></li>
 					<li><a href="#example">Example</a></li>
-					<li><a href="#what">Back top</a></li>
+					<li><a href="#what"><span href="#what" class="octicon octicon-arrow-up"></span> Back top</a></li>
 				</ul>
 			</div>
 		</div> <!-- END STICKY SIDEBAR -->
@@ -48,6 +51,13 @@
 				<p>A sticky sidebar looks like an ordinary sidebar but, remains visible as user scrolls the page. It offers excellent navigation for pages, just like this documentation page, which have a lot of content. Try scrolling and notice how the sidebar stays on the screen but, when you scroll back to top it becomes a normal sidebar.</p>
 
 				<p><span class="highlight">sticky-sidebar</span> is fully responsive. When user switches to mobile view, it adapts and becomes the popular sticky navbar. Try resizing your browser to see how it responds to different screen sizes.</p>
+			</div> <!-- end item -->
+
+			<div class="item" id="download">
+				<h2>Download</h2>
+				<p>You can download the zip from the GitHub <a href="https://github.com/abhimanyuPathania/sticky-sidebar">here</a>.<p/>
+
+				<p>The zip contains minified files which you can directly use after you extract them out. Next section explains how to install the plugin after you download it.</p>
 			</div> <!-- end item -->
 			
 			<div class="item" id="install">
@@ -86,14 +96,14 @@
 					The plugin divides the parent container into two parts.
 					<code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code> is the sticky sidebar container. It contains <code class="language-markup">&lt;h4 class=&quot;sticky-sidebar-header&quot;&gt;</code> (I am using an <code class="language-markup">&lt;h4&gt;</code> tag. It could be any block level element) which carries sidebar and navbar's heading.
 
-					<p class="imp"><span class="octicon octicon-issue-opened"></span>If you don't want to use a sidebar heading, you can leave this tag empty. But you must have an element with class <code class="language-markup">sticky-sidebar-header</code> since it is targeted to insert the responsive icon in the mobile navbar layout mode.</p>
-
 					<p><code class="language-markup">&lt;div class=&quot;sticky-sidebar-content&quot;&gt;</code> will contain the actual sidebar content.</p>
 				</p>
 
 				<p>
 					<code class="language-markup">&lt;div class=&quot;page-content&quot;&gt;</code> is where all the content of your page goes.
 				</p>
+				
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>If you don't want to use a sidebar heading, you can leave this tag empty. But you must have an element with class <code class="language-markup">sticky-sidebar-header</code> since it is targeted to insert the responsive icon in the mobile navbar layout mode.</p>
 
 				<p class="imp"><span class="octicon octicon-issue-opened"></span><code class="language-markup">&lt;div class=&quot;sticky-sidebar&quot;&gt;</code> must come before the <code class="language-markup">&lt;div class=&quot;page-content&quot;&gt;</code> in the markup.</p>
 
@@ -131,7 +141,7 @@
 					The sidebar is floated right by default. Since we want the page to be responsive, percentage(%) widths are used. All these defaults can be easily overridden in your CSS by using the above hooks. 
 				</p>
 
-				<p class="imp"><span class="octicon octicon-issue-opened"></span>The widths values are % of the parent container's, as defined by the user (<code class="language-markup">&lt;body&gt;</code> by default), width. <a href="#example">Here</a> is an example showing complete markup.</p>
+				<p class="imp"><span class="octicon octicon-issue-opened"></span>The widths values are % of the parent container's, as defined by the user (<code class="language-markup">&lt;body&gt;</code> by default), width.
 
 			</div> <!-- end item -->
 
@@ -251,12 +261,13 @@
 	</div> <!-- END MAIN WRAPPER -->
 
 	<div class="footer">
-		<p>This is the footer content</p>
+		<p>Created and maintained by Abhimanyu Pathania</p>
+		<p><a href="https://github.com/abhimanyuPathania" target="_blank"><span class="octicon octicon-mark-github"></a></span></p>
 	</div>
 
 	<script type="text/javascript" src="scripts/prism.js"></script>
 	<script type="text/javascript" src="scripts/velocity.min.js"></script>
-	<script type="text/javascript" src="scripts/sticky-sidebar.js"></script>
-	<script type="text/javascript" src="scripts/base.js"></script>
+	<script type="text/javascript" src="scripts/sticky-sidebar-min.js"></script>
+	<script type="text/javascript" src="scripts/base-min.js"></script>
 </body>
 </html>
