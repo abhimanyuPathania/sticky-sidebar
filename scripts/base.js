@@ -26,6 +26,7 @@ function addActiveClass() {
 		return false;
 	}
 
+	//console.log("addActiveClass");
 	for (var i=0, len = itemDivKeys.length; i < len; i+=1) {
 		var itemDiv = activeLinkObj[itemDivKeys[i]].div;
 		var box = itemDiv.getBoundingClientRect();

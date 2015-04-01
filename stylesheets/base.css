@@ -55,6 +55,7 @@ code[class*="language-"], pre[class*="language-"]{
 	text-shadow: none;
 }
 body{
+	background-color: #ececec; /* backup value*/
 	background-image: url(../images/square.png);
 }
 

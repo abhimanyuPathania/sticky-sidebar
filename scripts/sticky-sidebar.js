@@ -48,6 +48,9 @@ function setupSidebar() {
 	navbar classe for fixing layout. Function checks the viewport size.*/
 	addNavbarClass();
 
+	//inital extra call to fix default browser scroll bug?
+	stickySidebar();
+
 	function stickySidebar() {
 
 		if (switchWidth && viewportWidth <= switchWidth) {
