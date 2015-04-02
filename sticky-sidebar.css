@@ -9,28 +9,25 @@
 	float: right;
 }
 
-.page-content.navbar,
-.page-content.navbar-plain{
+.page-content.navbar{
 	float: none;
 	width: 100%;
 }
 
-.sticky-sidebar.navbar,
-.sticky-sidebar.navbar-plain{
+.sticky-sidebar.navbar{
 	position: relative;
 	float: none;
 	width: 100%;
 	z-index: 1;
 }
 
-.sticky-sidebar.navbar .sticky-sidebar-header,
-.sticky-sidebar.navbar-plain .sticky-sidebar-header{
+.sticky-sidebar.navbar .sticky-sidebar-header{
  background-color: #ecf0f1;
  padding: 5px;
+ min-height: 30px;
 }
 
-.sticky-sidebar.navbar .sticky-sidebar-header:after,
-.sticky-sidebar.navbar-plain .sticky-sidebar-header:after{
+.sticky-sidebar.navbar .sticky-sidebar-header:after{
 	/* Three lines responsive icon */
 	content:"\2261";
 	float: right;
@@ -41,12 +38,17 @@
 	line-height: 30px;
 }
 
-.sticky-sidebar.navbar-plain .sticky-sidebar-content{
+.sticky-sidebar.navbar .sticky-sidebar-content.plain{
 	/* if CSS transforms are not avaialble; simply toggle the display property*/
 	display: none;
 	position: absolute;
 	width: 100%;
 	background-color: #ecf0f1;
+
+	opacity: 1;
+	-webkit-transform: scaleY(1);
+		-ms-transform: scaleY(1);
+			transform: scaleY(1);
 }
 
 .sticky-sidebar.navbar .sticky-sidebar-content{
@@ -74,3 +76,12 @@
 			transform: scaleY(1);
 }
 
+
+.clearfix:after{
+	content: " ";
+	font-size: 0;
+	display: block;
+	visibility: hidden;
+	height: 0;
+	clear:both;
+}

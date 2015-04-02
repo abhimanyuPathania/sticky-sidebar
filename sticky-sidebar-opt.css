@@ -24,12 +24,13 @@
 		z-index: 1;
 	}
 
-	.sticky-sidebar .sticky-sidebar-header{
+	.sticky-sidebar-header{
 		background-color: #ecf0f1;
 		padding: 5px;
+		min-height: 30px;
 	}
 
-	.sticky-sidebar .sticky-sidebar-header:after{
+	.sticky-sidebar-header:after{
 		content:"\2261";
 		float: right;
 		margin-right: 20px;
@@ -39,7 +40,7 @@
 		line-height: 30px;
 	}
 
-	.sticky-sidebar .sticky-sidebar-content{
+	.sticky-sidebar-content{
 		/*use these rules if CSS tranforms are detected*/
 		position: absolute;
 		width: 100%;
@@ -57,7 +58,7 @@
 				transform: scaleY(0);
 	}
 
-	.sticky-sidebar .sticky-sidebar-content.reveal{
+	.sticky-sidebar-content.reveal{
 		opacity: 1;
 		-webkit-transform: scaleY(1);
 			-ms-transform: scaleY(1);

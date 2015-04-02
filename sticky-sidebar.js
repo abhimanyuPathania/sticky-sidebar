@@ -12,6 +12,7 @@ var pageContent = document.querySelector(".page-content");
 
 setupSidebar();
 
+
 function setupSidebar() {
 
 	/*These 4 variables(behave like globals) are accessed via closure scope by different event handlers.
@@ -31,7 +32,7 @@ function setupSidebar() {
 	var switchWidth = parseInt(sidebar.getAttribute("data-switch-width"), 10);
 	var addClass =  !(sidebar.getAttribute("data-optimize") === "true");
 
-	var navbarClassPrefix = detectCssTransform();
+	var cssTransform = detectCssTransform();
 
 	if(window.addEventListener){
 		window.addEventListener("scroll", stickySidebar, false);
@@ -47,6 +48,10 @@ function setupSidebar() {
 	/* If user starts in the mobile display mode, we need to attach the
 	navbar classe for fixing layout. Function checks the viewport size.*/
 	addNavbarClass();
+
+	//inital extra call to fix default browser scroll bug. This runs after all the
+	//setup code
+	stickySidebar();
 
 	function stickySidebar() {
 
@@ -107,7 +112,7 @@ function setupSidebar() {
 			return false;
 		}
 
-		if(navbarClassPrefix !== "-plain"){
+		if(cssTransform){
 			sidebarContent.classList.toggle("reveal");
 		} else{
 			var sidebarContentStyle = sidebarContent.style;
@@ -149,27 +154,30 @@ function setupSidebar() {
 
 	function addNavbarClass() {
 		if (switchWidth && viewportWidth <= switchWidth && addClass){
-			sidebar.classList.add("navbar" + navbarClassPrefix);
-			pageContent.classList.add("navbar" + navbarClassPrefix);
+			sidebar.classList.add("navbar");
+			pageContent.classList.add("navbar");
 		}
 	}
 
 	function removeNavbarClass() {
 		if (switchWidth && viewportWidth > switchWidth && addClass){
-			sidebar.classList.remove("navbar" + navbarClassPrefix);
-			pageContent.classList.remove("navbar" + navbarClassPrefix);
+			sidebar.classList.remove("navbar");
+			pageContent.classList.remove("navbar");
 		}
 	}
 
 	function detectCssTransform() {
 		if (sidebar.style.transform !== undefined && sidebar.style.transition !== undefined){
-			return ""; // no prefix when CSS transforms available
+			return true; // no change when CSS transforms available
 		}
+
+		sidebarContent.classList.add("plain");
 
 		if(!addClass){
 			sidebar.classList.add("optimizePlain");
 		}
-		return "-plain";
+
+		return false;
 	}
 }
 
