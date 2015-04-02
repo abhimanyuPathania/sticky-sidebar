@@ -93,7 +93,7 @@ function setupSidebar() {
 				var pageContentCompStyle = window.getComputedStyle(pageContent);
 				//take into account the existing margin-top if any
 				var oldMargin = parseInt(pageContentCompStyle.marginTop, 10);
-				pageContent.style.marginTop = oldMargin + headerBox.height + 5 + "px";
+				pageContent.style.marginTop = oldMargin + headerBox.height + "px";
 
 				//fix to make sticky navbar
 				sidebarStyle.position = "fixed";
