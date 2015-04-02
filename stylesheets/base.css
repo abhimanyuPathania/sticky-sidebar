@@ -115,10 +115,6 @@ body{
 	color: #FFF;
 }
 
-.header p {
-	
-}
-
 .highlight{
 	color: #e74c3c;
 	font-weight: 400;
@@ -201,8 +197,6 @@ body{
 	max-width: 1100px;
 	margin: 0 auto;
 }
-
-
 
 /* SPECIFIC FONTS, BORDERS AND SPACING RULES*/
 
@@ -325,9 +319,19 @@ body{
 }
 
 @media screen and (max-width: 768px){
+
+	.main-wrapper{
+		box-sizing: border-box;
+		margin-top: 0px;
+	}
+	
 	.page-content{
 		float: none;
-		width: 97%;
+		width: 98%;
+
+		box-sizing: border-box;
+		padding-top: 0px;
+		margin: 40px auto;
 	}
 
 	.sticky-sidebar{
@@ -335,13 +339,18 @@ body{
 		float: none;
 		width: 100%;
 		z-index: 1;
+
+		padding-top: 0px;
 	}
 
-/*----*/
 	.sticky-sidebar-header{
-		background-color: #ecf0f1;
-		padding: 5px;
 		min-height: 30px;
+		margin: 0px;
+		padding: 10px 0px 10px 20px;
+
+		background-color: #3498db;
+		color: #FFF;
+		text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
 	}
 
 	.sticky-sidebar-header:after{
@@ -355,10 +364,14 @@ body{
 	}
 
 	.sticky-sidebar-content{
+
+		border-top: 2px solid #FFF;
+		background-color: #3498db;
+		padding-top: 10px;
+
 		/*use these rules if CSS tranforms are detected*/
 		position: absolute;
 		width: 100%;
-		background-color: #ecf0f1;
 		
 		transition: transform 180ms ease-in-out,
 	 				opacity 180ms ease-in-out;
@@ -378,7 +391,7 @@ body{
 			-ms-transform: scaleY(1);
 				transform: scaleY(1);
 	}
-/*----*/
+
 
 	.sticky-sidebar.optimizePlain .sticky-sidebar-content{
 		/* if CSS transforms are not avaialble; simply toggle the display property*/
@@ -395,7 +408,7 @@ body{
 	}
 
 
-	/* Base.css media queries */
+	/* Other media queries */
 
 	.header{
 		font-size: 1.8em;
@@ -405,17 +418,6 @@ body{
 		padding: 25px 15px;
 	}
 
-	.main-wrapper{
-		box-sizing: border-box;
-		margin-top: 0px;
-	}
-
-
-
-	.sticky-sidebar{
-		padding-top: 0px;
-	}
-	
 	.sticky-sidebar a{
 		color: #FFF;
 	}
@@ -430,19 +432,6 @@ body{
 		font-size: 1.1em;
 	}
 
-	.sticky-sidebar-header{
-		padding: 10px 0px 10px 20px;
-		margin: 0px;
-		background-color: #3498db;
-		color: #FFF;
-		text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.8);
-	}
-	
-	.sticky-sidebar-content{
-		border-top: 2px solid #FFF;
-		background-color: #3498db;
-		padding-top: 10px;
-	}
 
 	.sticky-sidebar-content.reveal{
 		opacity: 0.9;
@@ -464,13 +453,6 @@ body{
 		font-size: 1em;
 	}
 
-
-	.page-content{
-		box-sizing: border-box;
-		padding-top: 0px;
-		margin: 40px auto;
-	}
-	
 	.item{
 		padding: 10px 10px 0px
 	}
